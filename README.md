@@ -571,3 +571,47 @@ The project has been verified through a rigorous Move test suite and successful 
 
 * **Verified Test Cases**: Unit tests cover contract initialization, handling of insufficient SUI payments, and item destruction. Randomness testing was conducted using mocked randomness, specifically utilizing `random::create_for_testing` to simulate the Random object (`0x8`) which is otherwise restricted to the protocol layer.
 * **Deployment Status**: The package is successfully deployed to the Sui Testnet. The deployment was executed via the Sui CLI with a gas budget of 100,000,000 MIST (0.1 SUI), confirming the contract's readiness for high-concurrency environments.
+
+### 9. System Architecture Mind Map
+
+```mermaid
+mindmap
+  root((Sui Loot Box System))
+    Core Mechanics
+      Purchase Flow
+      Secure Opening
+      NFT Minting
+      Item Lifecycle
+    Rarity Distribution
+      ["Common (60%)"]
+      ["Rare (25%)"]
+      ["Epic (12%)"]
+      ["Legendary (3%)"]
+    Functional Requirements
+      init_game
+      purchase_loot_box
+      open_loot_box
+      get_item_stats
+      transfer_item
+      burn_item
+      update_rarity_weights
+    Sui Specifics
+      On-Chain Randomness
+        ["sui::random::Random"]
+        Entry function requirement
+        Local RandomGenerator creation
+      Object Model
+        ["GameConfig (Shared)"]
+        ["LootBox (Owned)"]
+        ["GameItem (NFT)"]
+        ["AdminCap (Capability)"]
+    Bonus Challenge
+      Pity System
+        30-box guarantee
+        Dynamic fields
+    Evaluation Criteria
+      ["Secure Randomness (35%)"]
+      ["Correctness (30%)"]
+      ["Code Quality (20%)"]
+      ["Events (15%)"]
+```
