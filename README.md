@@ -4,6 +4,10 @@
 
 This repository presents a production-grade implementation of a non-custodial **Loot Box System** engineered for the Sui blockchain. Developed as a solution for the Alkimi Hackathon Phase II (Problem Statement #2: Gaming), this system demonstrates the secure integration of verifiable on-chain randomness (`sui::random`), Sui's unique object-centric architecture, and a dynamic state-tracking "Pity" system for balanced game economies.
 
+> **📽️ Graphical Presentation**
+> For a high-level, visual explanation of the system, mechanics, and design philosophy, please review our official graphical presentation here: 
+> [**Loot_Boxes_Presentation.pdf**](https://github.com/Aazen45v/loot-box-system/blob/main/Loot_Boxes_Presentation.pdf)
+
 Our architecture is designed around several key principles:
 1. **Mathematical Fairness**: Secure entropy consumption eliminating "reroll" or composability attacks.
 2. **Object Autonomy**: Strict delineation between shared application state (`GameConfig`) and user-owned assets (`LootBox`, `GameItem`).
