@@ -2,6 +2,8 @@
 
 ## 🚀 Quick Pitch / Project Summary
 
+[![Decentralized Loot Box System]()](https://github.com/Aazen45v/loot-box-system/blob/main/Loot_Box_Explained.mp4)
+
 **1. The Introduction (What it is)**
 For problem statement #2, I built a decentralized Loot Box system on the Sui blockchain. It allows users to pay 1000 SUI to receive a sealed Loot Box. They can then securely open it to mint an NFT with different rarity tiers: Common, Rare, Epic, and Legendary.
 
