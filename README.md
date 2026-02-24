@@ -129,47 +129,7 @@ sui client publish --gas-budget 100000000
 
 ---
 
-## 9. Architectural Mind Map
+### 9. Architectural Mind Map
 
 The visual hierarchy of the implemented structural properties:
-```mermaid
-mindmap
-  root((Sui Loot Box System))
-    Core Mechanics
-      Purchase Flow
-      Secure Opening
-      NFT Minting
-      Item Lifecycle
-    Rarity Distribution
-      ["Common (60%)"]
-      ["Rare (25%)"]
-      ["Epic (12%)"]
-      ["Legendary (3%)"]
-    Functional Requirements
-      init_game
-      purchase_loot_box
-      open_loot_box
-      get_item_stats
-      transfer_item
-      burn_item
-      update_rarity_weights
-    Sui Specifics
-      On-Chain Randomness
-        ["sui::random::Random"]
-        Entry function requirement
-        Local RandomGenerator creation
-      Object Model
-        ["GameConfig (Shared)"]
-        ["LootBox (Owned)"]
-        ["GameItem (NFT)"]
-        ["AdminCap (Capability)"]
-    Bonus Challenge
-      Pity System
-        30-box guarantee
-        Dynamic fields
-    Evaluation Criteria
-      ["Secure Randomness (35%)"]
-      ["Correctness (30%)"]
-      ["Code Quality (20%)"]
-      ["Events (15%)"]
-```
+![Sui Loot Box System Architecture Mind Map](mindmap.png)
