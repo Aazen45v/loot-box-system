@@ -135,5 +135,5 @@ sui client publish --gas-budget 100000000
 
 ### 9. Architectural Mind Map
 
-The visual hierarchy of the implemented structural properties:-
+The visual hierarchy of the implemented structural properties:
 ![Sui Loot Box System Architecture Mind Map](mindmap.png)
