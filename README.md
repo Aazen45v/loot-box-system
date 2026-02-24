@@ -1,5 +1,21 @@
 # 🎮 Sui Decentralized Loot Box System
 
+## 🚀 Quick Pitch / Project Summary
+
+**1. The Introduction (What it is)**
+For problem statement #2, I built a decentralized Loot Box system on the Sui blockchain. It allows users to pay 1000 SUI to receive a sealed Loot Box. They can then securely open it to mint an NFT with different rarity tiers: Common, Rare, Epic, and Legendary.
+
+**2. The Security (The biggest technical achievement)**
+The hardest part of Web3 gaming is preventing players from gaming the system by aborting transactions if they don't get the item they want. I solved this by using Sui's on-chain randomness (`sui::random`). I made the `open_loot_box` method a `private entry` function which strictly prevents other contracts from looking at the random outcome and reversing the transaction. It's mathematically fair.
+
+**3. The Object Architecture (Demonstrating Sui knowledge)**
+I took full advantage of Sui's object model to optimize gas and security. The game's settings and treasury are held in a **Shared Object** so everyone can interact with it, while the Loot Boxes and the final minted NFT Items are **Owned Objects** that go directly to the player's wallet.
+
+**4. The Bonus Challenge (Going above and beyond)**
+To make the game economy fairer, I also implemented the bonus challenge: a Pity System. I used Sui's `dynamic_fields` to attach a counter to each specific player's address. If a player opens 30 loot boxes in a row without getting a Legendary item, the contract bypasses the randomness entirely and gives them a guaranteed 100% Legendary drop on their 31st try.
+
+---
+
 ## 1. System Overview & Architecture
 
 This repository presents a production-grade implementation of a non-custodial **Loot Box System** engineered for the Sui blockchain. Developed as a solution for the Alkimi Hackathon Phase II (Problem Statement #2: Gaming), this system demonstrates the secure integration of verifiable on-chain randomness (`sui::random`), Sui's unique object-centric architecture, and a dynamic state-tracking "Pity" system for balanced game economies.
