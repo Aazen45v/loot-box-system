@@ -1,8 +1,25 @@
 # 🎮 Loot Box System with On-Chain Randomness
 
-## Alkimi Hackathon - Problem Statement #2: Gaming
+## 🏆 Alkimi Hackathon - Problem Statement #2: Gaming
 
-Build a **loot box system** where players can purchase loot boxes using fungible tokens and receive randomly generated in-game items (NFTs) with varying rarity levels. The randomness must be verifiable and tamper-proof using Sui's native on-chain randomness.
+This repository implements a **Decentralized Loot Box System** built using Sui Move smart contracts. It serves as the backend logic for a Web3 game where players can purchase loot boxes and receive randomly generated in-game NFTs with varying rarity levels.
+
+### 🌟 Features Implemented
+1. **Purchase System**: Players pay `1000 SUI` to receive an unopened `LootBox`.
+2. **True Randomness**: Uses Sui's native on-chain `sui::random` to securely determine the rewards, making drops mathematically fair and tamper-proof.
+3. **NFT Minting & Rarity Tiers**: Random item generation drops items from four tiers: Common (60%), Rare (25%), Epic (12%), and Legendary (3%).
+4. **Pity System (Bonus)**: If a player opens 30 loot boxes consecutively without getting a Legendary item, their 31st box guarantees a Legendary drop!
+5. **Item Lifecycle**: Complete support for fetching stats, transferring, and burning items.
+
+### 🚀 How to Run the Project
+This is a smart contract backend, so it is compiled, tested, and deployed using the Sui CLI rather than run as a traditional app. 
+
+1. **Install the Sui CLI**: Make sure you have the [Sui CLI installed](https://docs.sui.io/guides/developer/getting-started/sui-install) locally.
+2. **Compile the Code**: Run `sui move build` from the project root to compile the contracts.
+3. **Run the Test Suite**: Run `sui move test` to execute the built-in unit tests verifying initialization, purchasing, opening (with mocked randomness), and the pity system.
+4. **Deploy to Testnet**: Run `sui client publish --gas-budget 100000000` to deploy the package to the Sui Testnet.
+
+---
 
 | Attribute | Value |
 |-----------|-------|
