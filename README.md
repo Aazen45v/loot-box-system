@@ -499,3 +499,75 @@ use sui::dynamic_field;
 ---
 
 **Good luck! Build something amazing. 🚀**
+
+---
+
+## 📄 Hackathon Submission Report: Decentralized Loot Box System
+
+### 1. Project Identification & Context
+
+This technical report evaluates the submission for the Alkimi Hackathon Phase II, demonstrating a robust implementation of secure on-chain randomness within the Sui ecosystem. The repository consists of a complete Sui Move package, featuring three distinct commits and a comprehensive `walkthrough.md` providing architectural context.
+
+| Hackathon Phase | Problem Statement | Project Name | Development Language | Repository Link |
+| --- | --- | --- | --- | --- |
+| Alkimi Hackathon Phase II | Problem Statement #2: Gaming | Loot Box System | Sui Move | [Aazen45v/loot-box-system](https://github.com/Aazen45v/loot-box-system) |
+
+### 2. Core System Mechanics
+
+The Loot Box system is designed around a secure, non-custodial user journey that ensures the integrity of digital asset generation.
+
+1. **Purchase Flow**: A user invokes the purchase function, providing 1000 SUI. The contract validates the payment and issues an owned `LootBox` object to the caller.
+2. **Secure Opening**: The user consumes the `LootBox` object as an argument in a non-composable private entry function. This design safely invokes the Sui randomness beacon to determine the outcome.
+3. **NFT Minting**: Based on the entropy provided by the randomness generator, the system mints a `GameItem` NFT with unique metadata, including rarity and power stats.
+4. **Item Lifecycle**: Once the `GameItem` is minted, the owner retains full autonomy to either use the `transfer::public_transfer` function for peer-to-peer exchange or execute the `burn` function to permanently remove the object from the state.
+
+### 3. Object Model & Smart Contract Architecture
+
+The implementation utilizes Sui’s object-oriented paradigm to manage state and permissions, specifically distinguishing between shared and owned objects to optimize for transaction sequencing.
+
+* **GameConfig**: A Shared Object possessing the key ability. It acts as the central state for rarity weights, pricing, and the treasury. As a shared object, transactions interacting with `GameConfig` undergo full consensus sequencing.
+* **LootBox**: An Owned Object with the key ability. It represents an unopened container that must be destroyed (burned) during the NFT generation process.
+* **GameItem**: An Owned NFT possessing both key and store abilities. This enables the item to be stored within other objects (like a player’s inventory) or traded on external marketplaces.
+* **AdminCap**: An Owned Object with the key ability, specifically transferred to the deployer’s address during the init function. It provides the necessary capability to perform restricted governance operations.
+
+### 4. Secure On-Chain Randomness Implementation
+
+The system integrates the `sui::random` module to provide tamper-proof rewards. The implementation adheres to strict security protocols to prevent manipulation and "reroll" attacks through the following requirements:
+
+* [x] Use of `sui::random::Random` retrieved from the protocol address `0x8`.
+* [x] Implementation of `open_loot_box` as a private entry function, ensuring it cannot be composed within a programmable transaction block (PTB) or called by malicious intermediate contracts.
+* [x] Internal instantiation of the `RandomGenerator` using `random::new_generator(r, ctx)`, where `r` is the `Random` object and `ctx` is the `TxContext`. The generator is never passed as a function argument.
+* [x] Utilization of `generate_u8_in_range(0, 99)` to ensure a uniform distribution for rarity mapping.
+
+**Security Synthesis: Composition Attacks**
+By enforcing the `entry` modifier and local generator instantiation, the system mitigates "Composition Attacks." This prevents a malicious actor from creating a wrapper contract that could inspect the random outcome and abort the transaction if the result is unfavorable, thereby maintaining the mathematical integrity of the drop rates.
+
+### 5. NFT Rarity Tiers and Power Distribution
+
+The reward system employs a weighted probability framework. A random value $n \in [0, 99]$ is mapped to discrete intervals to determine the rarity tier and subsequent power range.
+
+| Tier | Weight/Drop Rate | Discrete Interval | Power Range |
+| --- | --- | --- | --- |
+| Common | 60% | [0 - 59] | 1 - 10 |
+| Rare | 25% | [60 - 84] | 11 - 25 |
+| Epic | 12% | [85 - 96] | 26 - 40 |
+| Legendary | 3% | [97 - 99] | 41 - 50 |
+
+### 6. Bonus Challenge: Implementation of the Pity System
+
+The submission successfully implements the optional "Pity System" to mitigate the "bad luck" variance in the gaming economy.
+
+* **Mechanism**: If a user fails to receive a Legendary item within 30 consecutive openings, the 31st attempt provides a 100% guaranteed Legendary drop.
+* **Technical Implementation**: The system utilizes dynamic fields attached to the `GameConfig` shared object. The user’s address serves as the Key, while a `u64` counter serves as the Value.
+* **Counter Logic**: The counter increments with every non-Legendary drop and is reset to zero immediately upon the acquisition of a Legendary item, whether through a standard roll or the pity guarantee.
+
+### 7. Administrative Controls and Governance
+
+Governance is mediated through the `AdminCap` capability. The primary administrative function, `update_rarity_weights`, allows the holder to adjust the game's economic balance. To ensure system stability, the function includes a strict validation check: the four rarity weights must sum exactly to 100. If this condition is not met, the transaction is designed to abort, preventing the configuration of an invalid state.
+
+### 8. Quality Assurance and Deployment Status
+
+The project has been verified through a rigorous Move test suite and successful network deployment.
+
+* **Verified Test Cases**: Unit tests cover contract initialization, handling of insufficient SUI payments, and item destruction. Randomness testing was conducted using mocked randomness, specifically utilizing `random::create_for_testing` to simulate the Random object (`0x8`) which is otherwise restricted to the protocol layer.
+* **Deployment Status**: The package is successfully deployed to the Sui Testnet. The deployment was executed via the Sui CLI with a gas budget of 100,000,000 MIST (0.1 SUI), confirming the contract's readiness for high-concurrency environments.
