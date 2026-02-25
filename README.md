@@ -24,7 +24,7 @@ This repository presents a production-grade implementation of a non-custodial **
 
 > **📽️ Graphical Presentation**
 > For a high-level, visual explanation of the system, mechanics, and design philosophy, please review our official graphical presentation here: 
-> [**Loot_Boxes_Presentation.pdf**](https://github.com/Aazen45v/loot-box-system/blob/main/Loot_Boxes_Presentation.pdf)
+> [**Loot_Boxes_Presentation.pdf**](https://drive.google.com/file/d/1OEhiKWhb3mx1_JDIfKyK81TO6x8hi64X/view?usp=sharing)
 
 Our architecture is designed around several key principles:
 1. **Mathematical Fairness**: Secure entropy consumption eliminating "reroll" or composability attacks.
