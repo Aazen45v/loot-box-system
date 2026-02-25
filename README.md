@@ -2,7 +2,7 @@
 
 ## 🚀 Quick Pitch / Project Summary
 
-[![Project Explained](Screenshot.png)](https://youtu.be/-gn_aAgRoOQ)
+[![Project Explained](assets/Screenshot.png)](https://youtu.be/-gn_aAgRoOQ)
 
 **1. The Introduction (What it is)**
 For problem statement #2, I built a decentralized Loot Box system on the Sui blockchain. It allows users to pay 1000 SUI to receive a sealed Loot Box. They can then securely open it to mint an NFT with different rarity tiers: Common, Rare, Epic, and Legendary.
@@ -24,7 +24,7 @@ This repository presents a production-grade implementation of a non-custodial **
 
 > **📽️ Graphical Presentation**
 > For a high-level, visual explanation of the system, mechanics, and design philosophy, please review our official graphical presentation here: 
-> [**Loot_Boxes_Presentation.pdf**](https://drive.google.com/file/d/1OEhiKWhb3mx1_JDIfKyK81TO6x8hi64X/view?usp=sharing)
+> [**Loot_Boxes_Presentation.pdf**](assets/Loot_Boxes_Presentation.pdf)
 
 Our architecture is designed around several key principles:
 1. **Mathematical Fairness**: Secure entropy consumption eliminating "reroll" or composability attacks.
@@ -154,4 +154,4 @@ sui client publish --gas-budget 100000000
 ### 9. Architectural Mind Map
 
 The visual hierarchy of the implemented structural properties:
-![Sui Loot Box System Architecture Mind Map](mindmap.png)
+![Sui Loot Box System Architecture Mind Map](assets/mindmap.png)
